@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}product Controller!{% endblock %}
+
+{% block body %}
+
+     <h1>Produit index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>name</th>
+                <th>prix</th>
+                <th>image</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+              
+                <td>{{ product.name }}</td>
+                <td>{{ product.price | amount}}</td>
+                <td>
+      
+                    <img class="image" src="{{ asset('uploads/' ~ product.image) }}" alt="Image du produit">
+
+                </td>
+            
+
+            </tr>
+        {% else %}
+            <tr>
+                <td>Aucune correspondance trouvée</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+{% endblock %}
