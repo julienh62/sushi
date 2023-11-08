@@ -2,3 +2,26 @@
     max-width: 200px;
     
 }
+
+   
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+}
+ td {
+    margin-left: 70px;
+    min-width: 100px;
+}
+th {
+    min-height: 50px;
+    font-size:3rem;
+    font-weight: 500;
+}
+.cartQuantity {
+    color:red;
+}
+.product {
+    display:flex;
+}

@@ -21,6 +21,38 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+    /**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function filter($filter, $min , $max): array
+    {
+        $filters = [
+            'price_desc' => "p.price desc",
+            'price_asc' => "p.price asc",
+            'name_desc' => "p.name desc",
+            'name_asc' => "p.name asc"
+        ];
+
+        $sq = $this->createQueryBuilder('p');
+
+        $sq
+            ->andWhere('p.price BETWEEN :min AND :max')
+            ->setParameter('min', $min * 100)
+            ->setParameter('max', $max * 100);
+
+        if(array_key_exists($filter, $filters)){
+            $sq->add("orderBy", ($filters[$filter]));
+        }
+
+        return $sq->getQuery()->getResult();
+
+    }
+
+
+
+
+
+
 //    /**
 //     * @return Product[] Returns an array of Product objects
 //     */

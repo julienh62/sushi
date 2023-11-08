@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Paiement stripe
+{% endblock %}
+
+{% block body %}
+
+
+
+  <section>
+    <p>
+      We appreciate your business! If you have any questions, please email
+      <a href="mailto:orders@example.com">orders@example.com</a>.
+    </p>
+  </section>
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        const clientSecret = '{{ clientSecret }}';
+        const stripePublicKey = '{{ stripePublicKey }}';
+      //  const redirectAfterSuccesUrl = "{{ url('purchase_payment_success', {'id': purchase.id }) }}";
+      //  const redirectAfterSuccesUrl = "{{ url('purchase_payment_success', {'id': purchase.id }) }}";
+    </script>
+    <script src="/assets/js/payment.js"></script>
+{% endblock %}

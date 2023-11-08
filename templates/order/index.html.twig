@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} nouvelle booking{% endblock %}
+
+{% block body %}
+    <h1>Créer une nouvelle commande</h1>
+    {{ form_start(form) }}
+    {{form_rest(form) }}
+    <button class="btn-dark btn" type="submit">Créer</button>
+    {{ form_end(form) }}
+
+
+
+{% endblock %}
+
+

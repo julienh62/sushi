@@ -2,10 +2,14 @@
 
 {% block title %}product Controller!{% endblock %}
 
+{% block javascripts %}
+            {{encore_entry_script_tags("cart")}}  
+        {% endblock %}
+
 {% block body %}
 
-     <h1>Produit index</h1>
-
+ <h1>Nos Sushis</h1>
+ <div class="product">
     <table class="table">
         <thead>
             <tr>
@@ -26,19 +30,60 @@
                     <img class="image" src="{{ asset('uploads/' ~ product.image) }}" alt="Image du produit">
 
                 </td>
-            
+                <td> 
+                   
+                    <form action='add-cart/{{ product.id }}'>
+                        {% if app.session.get("cart")[product.id] is not defined %}    
+                            <input type ="number" name="quantity" value="1">
+                            <button type = "submit" class="add-cart-button" data-product="{{product.id}}"> Ajouter au panier</button>
+                        {% else %}
+                            <input type ="number" name="quantity" value="{{ app.session.get("cart")[product.id] }}">
+                            <button type = "submit" class="add-cart-button" data-product="{{product.id}}"> Modifier</button>
 
+                        {% endif %}    
+                    </form>    
+                </td>
+            
             </tr>
-        {% else %}
-            <tr>
-                <td>Aucune correspondance trouvée</td>
-            </tr>
+        
         {% endfor %}
         </tbody>
     </table>
 
+    <div id="search">
+        <form action='{{ path('filter') }}' method="get">
+            <select name="filter">
+              {% set filter = app.request.get("filter") %}
+                <option {% if filter == "price_asc" %} selected {% endif %}
+                        value="price_asc" >Prix croissant
+                </option>
+                <option {% if filter == "price_desc" %} selected {% endif %}
+                        value="price_desc">Prix décroissant
+                </option>
+                <option {% if filter == "name_asc" %} selected {% endif %}
+                        value="name_asc">Alphabétique
+                </option>
+                <option {% if filter == "name_desc" %} selected {% endif %}
+                        value="name_desc">Alphabétique Z->A
+                </option>
+
+            </select>
+            <br>
 
 
+        <label for="valeurMin">Valeur Minimale :</label>
+        <input type="number" id="min-price" name="min" min="0" value="1" max="5" step="0.1">
+
+        <br>
+
+        <label for="valeurMax">Valeur Maximale :</label>
+        <input type="number" id="max-price" name="max" min="0" value="3" max="5" step="0.1">
+        <br>
+        <button type="submit">Valider</button>
+        </form>
+    </div>
+  </div>
 
 
 {% endblock %}
+  

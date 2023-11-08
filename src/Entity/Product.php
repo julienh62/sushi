@@ -24,6 +24,10 @@ class Product
     #[ORM\Column(length: 255,nullable: true)]
     private ?string $image = null;
 
+    //propriété ajoutée à entité mais pas liéé à la bdd
+    private int $quantity=0;
+
+
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderLine::class)]
     private Collection $OrderLines;
 
@@ -72,6 +76,21 @@ class Product
 
         return $this;
     }
+    
+
+    public function getQuantity(): ?int
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+
 
     /**
      * @return Collection<int, OrderLine>

@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+   <h1>Mon panier </h1>
+    <div class="cart">
+
+            {% for product in products %}
+                    <h2>{{ product.name }}</h2>
+                    <h2>{{ product.price | amount}}</h2>
+                    <h2>{{ product.quantity }}</h2>
+
+                    <h2>
+                        <img class="image" src="{{ asset('uploads/' ~ product.image) }}" alt="Image du produit">
+                    </h2>
+                </hr>
+            {% else %}
+                <tr>
+                    <h2>Aucune correspondance trouvée</h2>
+                </tr>
+            {% endfor %}
+                    <h2>
+                          <a class="nav-link" href="{{ path('home') }}">Modifier ma commande</a>
+                   </h2>
+                   <h2>
+                       <a class="nav-link" href="{{ path('app_order') }}"> Commander </a>
+                   </h2>
+
+
+    </div>
+{% endblock %}
